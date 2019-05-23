@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { Component } from "react";
+import { render } from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 //Materialize
-import 'materialize-css/dist/css/materialize.min.css';
-import 'materialize-css/dist/js/materialize.min.js';
+import "materialize-css/dist/css/materialize.min.css";
+import "materialize-css/dist/js/materialize.min.js";
 
 //Importing Routes
 //No Logged
@@ -20,7 +20,6 @@ import Options from "./routes/logged/Options";
 import LogOut from "./routes/logged/LogOut";
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -30,67 +29,73 @@ class App extends Component {
     this.handleLogOut = this.handleLogOut.bind(this);
   }
 
-  handleLogOut () {
-    
-    fetch("/api/user/logout",{
+  handleLogOut() {
+    fetch("/api/user/logout", {
       method: "GET",
       body: JSON.stringify({
         email: this.state.email,
-        password: this.state.password,
+        password: this.state.password
       }),
       headers: {
-        "Accept": "application/json",
-        "Content-Type" : "application/json"
-      }        
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      this.props.handleAuth();
-    });
-    
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.props.handleAuth();
+      });
+
     this.setState({
-      isLogged:false
-    })
+      isLogged: false
+    });
   }
 
-  handleAuth () {
+  handleAuth() {
     this.setState({
-      isLogged : !this.state.isLogged
-    })
+      isLogged: !this.state.isLogged
+    });
   }
 
   render() {
     const isLogged = this.state.isLogged;
     return (
-      <Router>
-        { this.state.isLogged ?
-        <div className="green lighten-5 all-height">
-          <Navigation isLogged={isLogged}/>
-          <div className="container">
-            <Route exact path="/Dashboard" component={Dashboard} />
-            <Route path="/Profile" component={Profile} />
-            <Route path="/Options" component={Options} />
-            <Route path="/LogOut" component={LogOut} />
+      <div className="App">
+        {this.state.isLogged ? (
+          <div className="green lighten-5 all-height">
+            <Navigation isLogged={isLogged} />
+            <div className="container">
+              <Route exact path="/Dashboard" component={Dashboard} />
+              <Route path="/Profile" component={Profile} />
+              <Route path="/Options" component={Options} />
+              <Route path="/LogOut" component={LogOut} />
+            </div>
           </div>
-        </div>
-        :
-        <div className="green lighten-5 all-height">
-          <Navigation isLogged={isLogged}/>
-          <div className="container">
-            <Route exact path="/" component={Home} />
-            <Route path="/About" component={About} />
-            <Route path="/SignIn"
-              render={(props) => <SignIn isLogged={isLogged} handleAuth={this.handleAuth} />}
-            />
-            <Route path="/SignUp" component={SignUp} />
+        ) : (
+          <div className="green lighten-5 all-height">
+            <Navigation isLogged={isLogged} />
+            <div className="container">
+              <Route exact path="/" component={Home} />
+              <Route path="/About" component={About} />
+              <Route
+                path="/SignIn"
+                render={props => (
+                  <SignIn isLogged={isLogged} handleAuth={this.handleAuth} />
+                )}
+              />
+              <Route path="/SignUp" component={SignUp} />
+            </div>
           </div>
-        </div>
-        }
-      </Router>
+        )}
+      </div>
     );
   }
 }
 
-render(<App />, document.getElementById('app'));
-
+render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("app")
+);

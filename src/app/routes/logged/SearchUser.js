@@ -5,27 +5,29 @@ class SearchUser extends Component {
     super(props);
     this.state = {
       UserToSearchInput: "",
-      listOfUsersFound:[{name:"John Lennon"},{name:"Richard"}]
+      listOfUsersFound: [{ name: "John Lennon" }, { name: "Richard" }]
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.listOfUsersFound = this.listOfUsersFound.bind(this);
+    // this.renderlistOfUsersFound = this.renderlistOfUsersFound.bind(this);
   }
 
-  renderlistOfUsersFound () {
-    
-    const usersFound = this.state.listOfUsersFound;
+  // renderlistOfUsersFound() {
+  //   const usersFound = this.state.listOfUsersFound;
 
-    const friendList = stateList.map((usersFound, index) =>
-        <a key={index} 
-        className="collection-item grey-text text-lighter-4"
-        onClick={(user)=>this.props.changeActiveFriend(user.name)}
-        > {user.name} 
-        </a>
-    );
+  //   const friendList = usersFound.map(({ name, index }) => (
+  //     <a
+  //       key={index}
+  //       className="collection-item grey-text text-lighter-4"
+  //       onClick={user => this.props.changeActiveFriend(user.name)}
+  //     >
+  //       {" "}
+  //       {user.name}
+  //     </a>
+  //   ));
 
-    return friendList
-  }
+  //   return friendList;
+  // }
 
   handleSubmit() {
     fetch(`/api/user/search/`, {
@@ -72,22 +74,19 @@ class SearchUser extends Component {
                   required
                 />
                 <label className="label-icon" htmlFor="search">
-                  <i className="material-icons"
-                    onClick={this.handleSubmit}>
+                  <i className="material-icons" onClick={this.handleSubmit}>
                     search
-                </i>
+                  </i>
                 </label>
                 <i className="material-icons">close</i>
               </div>
             </form>
           </div>
         </nav>
-        <div className="grey lighten-5">
+        {/* <div className="grey lighten-5">
           <h6 className="black-text">Friend List:</h6>
-          <div className="collection">
-            {this.renderlistOfUsersFound()}
-          </div>
-        </div>
+          <div className="collection">{this.renderlistOfUsersFound()}</div>
+        </div> */}
       </div>
     );
   }

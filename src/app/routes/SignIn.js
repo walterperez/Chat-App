@@ -21,23 +21,17 @@ class SignIn extends Component {
 
   handleForm(e) {
     e.preventDefault();
-    console.log(e.target);
     fetch("/api/user/signin", {
       method: "POST",
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      }),
+      body: JSON.stringify(this.state),
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json"
       }
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.props.handleAuth();
-        this.props.history.push("/Dashboard")
+        this.props.history.push("/Dashboard");
       });
   }
 
