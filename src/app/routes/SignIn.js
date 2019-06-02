@@ -30,14 +30,21 @@ class SignIn extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        this.props.handleAuth();
-        this.props.history.push("/Dashboard");
+        console.log(data);
+        if (data.error) {
+          this.setState({ error: data.error });
+        } else {
+          this.props.handleAuth();
+          this.props.history.push("/Dashboard");
+        }
       });
   }
 
   render() {
+    const { error } = this.state;
     return (
       <div>
+        {error && <p>{error}</p>}
         <div className="row center-align">
           <div className="col s12 m8 offset-m2 l6 center-align">
             <div className="card light-grey darken-1 hoverable">
