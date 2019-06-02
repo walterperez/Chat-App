@@ -7,8 +7,9 @@
     "server": "nodemon ./src/index.js",
     "client": "webpack --mode development --watch",
     "db": "mongod",
+    "build": "webpack --config webpack.config.js",
     "dev": "concurrently \"npm run db\" \"npm run server\" \"npm run client\"",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run build\" \"npm run server\""
   },
   "keywords": [],
   "author": "",
@@ -46,6 +47,10 @@
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-dev-server": "^3.5.1",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.1"
   }
 }

@@ -36,15 +36,16 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+//Static Files
+app.use(express.static(path.join(__dirname, "public")));
 
 //Routes
+app.get("/", (req, res) => {
+  res.sendFile("index");
+});
 app.use("/api/", indexRoute);
 app.use("/api/user", userRoute);
 app.use("/api/room:id", roomRoute);
-
-//Static Files
-// app.use('/public', express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, "public")));
 
 //Start Express Server
 const server = app.listen(app.get("PORT"), () => {
