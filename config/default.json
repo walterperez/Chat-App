@@ -1,4 +1,4 @@
 {
-    "mongoURI":"mongodb://localhost:27017/chat-app-crud",
-    "jwtSecret":"super_app_very_difficult_pass"
+  "mongoURI": "mongodb://localhost:27017/chat-app-crud",
+  "jwtSecret": "super_app_very_difficult_pass"
 }

@@ -7,7 +7,8 @@
     "server": "nodemon ./src/index.js",
     "client": "webpack --mode development --watch",
     "db": "mongod",
-    "start": "concurrently \"npm run db\" \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run db\" \"npm run server\" \"npm run client\"",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "bcryptjs": "^2.4.3",
     "concurrently": "^4.1.0",
     "config": "^3.0.1",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "jsonwebtoken": "^8.5.1",
